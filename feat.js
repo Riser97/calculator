@@ -51,7 +51,6 @@ const [input, setInput] = React.useState("0");
   const [output, setOutput] = React.useState("");
   const [calculatorData, setCalculatorData] = React.useState("");
 
-
   const handleInput = (value) => {
     const number = numbers.find((num) => num === value);
     const operator = operators.find((op) => op === value);
