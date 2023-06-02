@@ -49,10 +49,41 @@ const Keyboard = ({ handleInput }) => (
 const App = () => {
 const [input, setInput] = React.useState("0");
   const [output, setOutput] = React.useState("");
+  const [calculatorData, setCalculatorData] = React.useState("");
 
 
-  const handleInput = () => {}
+  const handleInput = (value) => {
+    const number = numbers.find((num) => num === value);
+    const operator = operators.find((op) => op === value);
 
+    switch (value) {
+      case "=":
+        handleSubmit();
+        break;
+      case "AC":
+        handleClear();
+        break;
+      case number:
+        handleNumbers(value);
+        break;
+      case ".":
+        dotOperator(value);
+        break;
+      case operator:
+        handleOperators(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleOutput = () => {
+    setOutput(calculatorData);
+  };
+
+  React.useEffect(() => {
+    handleOutput();
+  }, [calculatorData]);
 
   return (
     <div className="container">
