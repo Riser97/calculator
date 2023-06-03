@@ -51,6 +51,30 @@ const [input, setInput] = React.useState("0");
   const [output, setOutput] = React.useState("");
   const [calculatorData, setCalculatorData] = React.useState("");
 
+  const handleSubmit = () => {}
+
+  const handleClear = () => {}
+
+  const handleNumbers = (value) => {
+    if (!calculatorData.length) {
+      setInput(`${value}`);
+      setCalculatorData(`${value}`);
+    } else {
+      if (value === 0 && (calculatorData === "0" || input === "0")) {
+        setCalculatorData(`${calculatorData}`);
+      } else {
+        const lastChat = calculatorData.charAt(calculatorData.length - 1);
+        const isLastChatOperator =
+          lastChat === "*" || operators.includes(lastChat);
+
+        setInput(isLastChatOperator ? `${value}` : `${input}${value}`);
+        setCalculatorData(`${calculatorData}${value}`);
+      }
+    }
+  };
+
+  const dotOperator = () => {}
+
   const handleInput = (value) => {
     const number = numbers.find((num) => num === value);
     const operator = operators.find((op) => op === value);
