@@ -73,7 +73,29 @@ const [input, setInput] = React.useState("0");
     }
   };
 
-  const dotOperator = () => {}
+  const dotOperator = () => {
+    const lastChat = calculatorData.charAt(calculatorData.length - 1);
+    if (!calculatorData.length) {
+      setInput("0.");
+      setCalculatorData("0.");
+    } else {
+      if (lastChat === "*" || operators.includes(lastChat)) {
+        setInput("0.");
+        setCalculatorData(`${calculatorData} 0.`);
+      } else {
+        setInput(
+          lastChat === "." || input.includes(".") ? `${input}` : `${input}.`
+        );
+        const formattedValue =
+          lastChat === "." || input.includes(".")
+            ? `${calculatorData}`
+            : `${calculatorData}.`;
+        setCalculatorData(formattedValue);
+      }
+    }
+  };
+
+  const handleOperators = (value) => {}
 
   const handleInput = (value) => {
     const number = numbers.find((num) => num === value);
