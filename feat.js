@@ -95,7 +95,37 @@ const [input, setInput] = React.useState("0");
     }
   };
 
-  const handleOperators = (value) => {}
+  const handleOperators = (value) => {
+   if (calculatorData.length) {
+        setInput(`${value}`);
+        const beforeLastChat = calculatorData.charAt(calculatorData.length - 2);
+  
+        const beforeLastChatIsOperator =
+          operators.includes(beforeLastChat) || beforeLastChat === "*";
+  
+        const lastChat = calculatorData.charAt(calculatorData.length - 1);
+        
+        const lastChatIsOperator = operators.includes(lastChat) || lastChat === "*";
+        
+        const validOp = value === "x" ? "*" : value;
+        if (
+          (lastChatIsOperator && value !== "-") ||
+          beforeLastChatIsOperator && lastChatIsOperator
+        ) {
+          if (beforeLastChatIsOperator) {
+            const updatedValue = `${calculatorData.substring(
+              0,
+              calculatorData.length - 2
+            )}${value}`;
+            setCalculatorData(updatedValue);
+          } else {
+            setCalculatorData(`${calculatorData.substring(0, calculatorData.length - 1)}${validOp}`);
+          }
+        } else {
+          setCalculatorData(`${calculatorData}${validOp}`);
+        }
+      }
+    };
 
   const handleInput = (value) => {
     const number = numbers.find((num) => num === value);
